@@ -1,5 +1,5 @@
 # Define the unique key for this command (you should generate a new key for each customer)
-$key = "UNIQUE-CUSTOMER-KEY-1"
+$key = "UNIQUE-CUSTOMER-KEY-3"
 
 # Define the server-side endpoint that checks and tracks key usage
 $validationUrl = "https://key-validation-backend.onrender.com"
