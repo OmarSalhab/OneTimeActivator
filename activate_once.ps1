@@ -21,7 +21,7 @@ if (Test-Path $markerFile) {
 
 # Execute the original command
 try {
-    irm https://get.activated.win | iex
+    #irm https://get.activated.win | iex
 
     # If successful, mark the key as used locally and remotely
     New-Item -Path $markerFile -ItemType File -Force | Out-Null
