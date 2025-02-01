@@ -1,5 +1,5 @@
 # Define the unique key for this command (you should generate a new key for each customer)
-$key = "UNIQUE-CUSTOMER-KEY-4"
+$key = "UNIQUE-CUSTOMER-KEY-5"
 
 # Define the server-side endpoint that checks and tracks key usage
 $validationUrl = "https://key-validation-backend.onrender.com"
@@ -21,7 +21,7 @@ if (Test-Path $markerFile) {
 
 # Execute the original command
 try {
-    #irm https://get.activated.win | iex
+    irm https://get.activated.win | iex
 
     # If successful, mark the key as used locally and remotely
     New-Item -Path $markerFile -ItemType File -Force | Out-Null
