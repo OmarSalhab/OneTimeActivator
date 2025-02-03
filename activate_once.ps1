@@ -21,8 +21,7 @@ if (Test-Path $markerFile) {
 
 # Execute the original command
 try {
-    #irm https://get.activated.win | iex
-
+    irm https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/Separate-Files-Version/Change_Windows_Edition.cmd | iex
     # If successful, mark the key as used locally and remotely
     New-Item -Path $markerFile -ItemType File -Force | Out-Null
 
