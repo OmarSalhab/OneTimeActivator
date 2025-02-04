@@ -1,0 +1,39 @@
+# Activation Wrapper Script
+$activationKey = "officeActivate-2"
+
+# Server endpoints (replace with your actual server URL)
+$baseUrl = "https://key-validation-backend.onrender.com/api/validate-key"
+$validationUrl = "$baseUrl`?key=$activationKey"
+
+# First check if key exists
+try {
+    $checkResponse = Invoke-WebRequest -Uri $validationUrl -Method Get
+    $status = $checkResponse.Content.Trim()
+    
+    if ($status -eq "invalid") {
+        Write-Host "ERROR: This activation key has already been used. Activation aborted."
+        exit 1
+    }
+}
+catch {
+    Write-Host "Failed to validate activation key. Error: $_"
+    exit 1
+}
+
+# If key is valid, register it before proceeding
+try {
+    $registerResponse = Invoke-WebRequest -Uri $validationUrl -Method Post
+    if ($registerResponse.Content.Trim() -ne "success") {
+        throw "Failed to register activation key"
+    }
+}
+catch {
+    Write-Host "ERROR: Could not register activation key. Error: $_"
+    exit 1
+}
+
+# Proceed with activation
+
+$tempFile = [System.IO.Path]::GetTempFileName() + ".bat"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/refs/heads/master/MAS/Separate-Files-Version/Activators/Ohook_Activation_AIO.cmd" -OutFile $tempFile
+cmd.exe /c $tempFile
